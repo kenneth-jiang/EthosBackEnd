@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  openness: MyString
+  conscientiousness: MyString
+  extraversion: MyString
+  agreeableness: MyString
+  neuroticism: MyString
+
+two:
+  openness: MyString
+  conscientiousness: MyString
+  extraversion: MyString
+  agreeableness: MyString
+  neuroticism: MyString
