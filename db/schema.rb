@@ -10,6 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20171216203908) do
+
+  create_table "personalities", force: :cascade do |t|
+    t.string "openness"
+    t.string "conscientiousness"
+    t.string "extraversion"
+    t.string "agreeableness"
+    t.string "neuroticism"
+    t.string "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "searches", force: :cascade do |t|
+    t.string "search_term"
+    t.string "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "password_digest"
+    t.string "full_name"
+    t.string "email"
+    t.string "profile_pic"
+    t.string "biography"
+    t.string "interests"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end
