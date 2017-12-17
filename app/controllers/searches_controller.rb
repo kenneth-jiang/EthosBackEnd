@@ -1,2 +1,2 @@
-class SearchesController < ApplicationController
+class Api::V1::SearchesController < ApplicationController
 end
