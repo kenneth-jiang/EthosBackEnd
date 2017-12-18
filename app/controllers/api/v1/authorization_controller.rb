@@ -10,6 +10,17 @@ class Api::V1::AuthorizationController < ApplicationController
     end
   end
 
+  def show
+    token = request.headers['token']
+    decoded = JWT.decode(token, ENV['SECRET_KEY'], ENV['ALGORITHM'])
+    @user = User.find_by(id: decoded.first['user_id'])
+    if @user
+      render json: @user
+    else
+      render json: {error: 'No user found.'}
+    end
+  end
+
   private
 
   def user_params

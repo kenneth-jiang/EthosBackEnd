@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
   # include ActionController::HttpAuthentication::Token::ControllerMethods
   #
-  # before_action :authorized
+  # # before_action :authorized
   #
   # def issue_token(payload)
   #   JWT.encode(payload, ENV['SECRET_KEY'], ENV['ALGORITHM'])
@@ -9,12 +9,12 @@ class ApplicationController < ActionController::API
   #
   # def decode_token(payload)
   #   begin
-  #     JWT.decode(payload, ENV['SECRET_KEY'], true, ENV['ALGORITHM')
+  #     JWT.decode(payload, ENV['SECRET_KEY'], true, ENV['ALGORITHM'])
   #   rescue JWT::DecodeError
   #     return nil
   #   end
   # end
-  #
+
   # def current_user
   #   authenticate_or_request_with_http_token do |token, options|
   #     if decode_token(token)
@@ -27,7 +27,7 @@ class ApplicationController < ActionController::API
   # def logged_in?
   #   !!current_user
   # end
-  #
+
   # def authorized
   #   render json: {error: "Access denied: not authorized."}, status: 401 unless logged_in?
   # end
