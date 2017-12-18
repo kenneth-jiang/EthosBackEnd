@@ -20,7 +20,7 @@ class Api::V1::UsersController < ApplicationController
   def update
     # update user info
   end
-  
+
   private
 
   def user_params
