@@ -4,6 +4,8 @@ Rails.application.routes.draw do
       post '/signup', to: 'users#create'
       post '/login', to: 'authorization#create'
       get '/current_user', to: 'authorization#show'
+      post '/search', to: 'searches#create'
+      get '/personalities', to: 'personalities#show'
     end
   end
 end

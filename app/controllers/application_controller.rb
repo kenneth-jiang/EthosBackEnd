@@ -3,6 +3,17 @@ class ApplicationController < ActionController::API
   #
   # # before_action :authorized
   #
+  def my_user
+    decoded = JWT.decode(request.headers['Authorization'], ENV['SECRET_KEY'], ENV['ALGORITHM'])
+    decoded_id = decoded[0]['user_id']
+    currentUser = User.find_by(id: decoded_id)
+  end
+
+  # def headers
+  #   decoded = JWT.decode(request.headers['Authorization'], ENV['SECRET_KEY'], ENV['ALGORITHM'])
+  #   header = {'Authorization': 'Bearer ' + decoded[0]['access_token']}
+  #   byebug
+  # end
   # def issue_token(payload)
   #   JWT.encode(payload, ENV['SECRET_KEY'], ENV['ALGORITHM'])
   # end
@@ -14,15 +25,7 @@ class ApplicationController < ActionController::API
   #     return nil
   #   end
   # end
-
-  # def current_user
-  #   authenticate_or_request_with_http_token do |token, options|
-  #     if decode_token(token)
-  #       user_id = decode_token.first['user_id']
-  #       @current_user ||= User.find_by(id: user_id)
-  #     end
-  #   end
-  # end
+  #
   #
   # def logged_in?
   #   !!current_user

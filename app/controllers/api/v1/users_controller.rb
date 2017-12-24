@@ -1,8 +1,8 @@
 class Api::V1::UsersController < ApplicationController
 
-  def new
-    # displays initial information when signing up
-  end
+  # def new
+  #   # displays initial information when signing up
+  # end
 
   def create
     @user = User.new(user_params)
@@ -17,9 +17,9 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def update
-    # update user info
-  end
+  # def update
+  #   # update user info
+  # end
 
   private
 

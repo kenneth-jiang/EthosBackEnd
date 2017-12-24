@@ -6,7 +6,7 @@ class Api::V1::AuthorizationController < ApplicationController
       token = JWT.encode({user_id: @user.id}, ENV['SECRET_KEY'], ENV['ALGORITHM'])
       render json: {id: @user.id, username: @user.username, token: token}
     else
-      render json: {error: "Error signing in."}
+      render json: {error: "Error signing in."}, status: 401
     end
   end
 
@@ -17,7 +17,7 @@ class Api::V1::AuthorizationController < ApplicationController
     if @user
       render json: @user
     else
-      render json: {error: 'No user found.'}
+      render json: {error: 'No user found.'}, status: 401
     end
   end
 
