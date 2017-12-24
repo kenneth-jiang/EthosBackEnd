@@ -1,5 +1,9 @@
 class Api::V1::UsersController < ApplicationController
 
+  def index
+    @users = User.all
+    render json: {users: @users}
+  end
   # def new
   #   # displays initial information when signing up
   # end
