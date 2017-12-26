@@ -3,13 +3,14 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/signup', to: 'users#create'
       post '/login', to: 'authorization#create'
-      get '/current_user', to: 'authorization#show'
 
       get '/all_users', to: 'users#index'
-
-      post '/search', to: 'searches#create'
+      get '/current_user', to: 'users#show'
 
       get '/personalities', to: 'personalities#show'
+
+      post '/wolfram_search', to: 'wolfram_searches#create'
+
     end
   end
 end

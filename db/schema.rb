@@ -23,21 +23,25 @@ ActiveRecord::Schema.define(version: 20171216203908) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "searches", force: :cascade do |t|
-    t.string "search_term"
-    t.string "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
     t.string "full_name"
     t.string "email"
+    t.string "phone_number"
     t.string "profile_pic"
+    t.string "status"
     t.string "biography"
     t.string "interests"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "wolfram_searches", force: :cascade do |t|
+    t.string "searches"
+    t.string "results"
+    t.string "favorites"
+    t.string "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

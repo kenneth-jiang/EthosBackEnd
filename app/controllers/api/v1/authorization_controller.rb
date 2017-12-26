@@ -4,26 +4,15 @@ class Api::V1::AuthorizationController < ApplicationController
     @user = User.find_by(username: params[:user][:username])
     if @user && @user.authenticate(params[:user][:password])
       token = JWT.encode({user_id: @user.id}, ENV['SECRET_KEY'], ENV['ALGORITHM'])
-      render json: {id: @user.id, username: @user.username, token: token}
+      render json: {user: @user, token: token}
     else
       render json: {error: "Error signing in."}, status: 401
-    end
-  end
-
-  def show
-    token = request.headers['token']
-    decoded = JWT.decode(token, ENV['SECRET_KEY'], ENV['ALGORITHM'])
-    @user = User.find_by(id: decoded.first['user_id'])
-    if @user
-      render json: @user
-    else
-      render json: {error: 'No user found.'}, status: 401
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:username, :password)
+    params.require(:user).permit(:username, :password, :full_name, :email, :phone_number, :profile_pic, :status, :biography, :interests)
   end
 end
