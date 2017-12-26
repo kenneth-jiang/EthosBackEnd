@@ -10,7 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171216203908) do
+ActiveRecord::Schema.define(version: 20171226110921) do
+
+  create_table "clicks", force: :cascade do |t|
+    t.string "click_term"
+    t.integer "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "faroo", force: :cascade do |t|
+    t.string "title"
+    t.string "kwic"
+    t.string "content"
+    t.string "url"
+    t.string "image_url"
+    t.string "author"
+    t.integer "votes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "news", force: :cascade do |t|
+    t.string "name"
+    t.string "author"
+    t.string "description"
+    t.string "url"
+    t.string "image_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "personalities", force: :cascade do |t|
     t.string "openness"
@@ -18,9 +47,33 @@ ActiveRecord::Schema.define(version: 20171216203908) do
     t.string "extraversion"
     t.string "agreeableness"
     t.string "neuroticism"
-    t.string "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reddit", force: :cascade do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "searches", force: :cascade do |t|
+    t.string "search_term"
+    t.integer "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "spotify", force: :cascade do |t|
+    t.string "title"
+    t.string "artist"
+    t.string "genre"
+    t.integer "popularity"
+    t.string "image_url"
+    t.string "uri"
+    t.integer "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: :cascade do |t|
@@ -33,17 +86,29 @@ ActiveRecord::Schema.define(version: 20171216203908) do
     t.string "status"
     t.string "biography"
     t.string "interests"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean "private"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "wolfram_searches", force: :cascade do |t|
-    t.string "searches"
-    t.string "results"
-    t.string "favorites"
-    t.string "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "wolfram", force: :cascade do |t|
+    t.string "result_id"
+    t.string "titles"
+    t.string "image_urls"
+    t.integer "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "youtube", force: :cascade do |t|
+    t.string "videoId"
+    t.string "channelId"
+    t.string "title"
+    t.string "description"
+    t.string "image_url"
+    t.integer "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

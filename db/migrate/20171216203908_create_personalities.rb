@@ -6,9 +6,9 @@ class CreatePersonalities < ActiveRecord::Migration[5.1]
       t.string :extraversion
       t.string :agreeableness
       t.string :neuroticism
-      t.string :user_id
+      t.integer :user_id
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

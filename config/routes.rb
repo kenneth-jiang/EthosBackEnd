@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :faroos
+  resources :reddits
+  resources :clicks
+  resources :searches
+  resources :spotifies
+  resources :youtube_videos
   namespace :api do
     namespace :v1 do
       post '/signup', to: 'users#create'
@@ -9,7 +15,7 @@ Rails.application.routes.draw do
 
       get '/personalities', to: 'personalities#show'
 
-      post '/wolfram_search', to: 'wolfram_searches#create'
+      post '/wolfram_search', to: 'wolfram#search'
 
     end
   end

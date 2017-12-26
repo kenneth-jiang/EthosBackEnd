@@ -10,8 +10,9 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string :status
       t.string :biography
       t.string :interests
+      t.boolean :private
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end
