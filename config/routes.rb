@@ -15,8 +15,14 @@ Rails.application.routes.draw do
 
       get '/personalities', to: 'personalities#show'
 
-      post '/wolfram_search', to: 'wolfram#search'
+      post '/click', to: 'clicks#create'
 
+      post '/wolfram_search', to: 'wolfram#search'
+      post '/youtube_search', to: 'youtube#search'
+      post 'news_search', to: 'news#search'
+      post '/faroo_search', to: 'faroo#search'
+      post '/reddit_search', to: 'reddit#search'
+      
     end
   end
 end
