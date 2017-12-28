@@ -11,4 +11,5 @@ class User < ApplicationRecord
   has_many :news
   has_many :wolfram
   has_many :youtube
+  has_many :sources
 end

@@ -17,4 +17,19 @@ class Api::V1::WolframController < ApplicationController
     render json: resp_json
   end
 
+  def favorite
+    @wolfram = Wolfram.find_by(result_id: params[:queryresult][:id])
+    if (!@wolfram)
+      Wolfram.create(
+        result_id: params[:queryresult][:id],
+        titles: params[:queryresult][:pods].map {|pod| pod[:title]}
+        image_urls: params[:queryresult][:pods].map {|pod| pod[:subpod].map {|subpod| subpod[:img][:src]}}
+        user_id: my_user.id
+      )
+      render json: {success: "Success"}
+    else
+      render json: {error: "Already created"}
+    end
+  end
+
 end
