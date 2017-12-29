@@ -53,6 +53,17 @@ ActiveRecord::Schema.define(version: 20171227144438) do
   end
 
   create_table "reddit", force: :cascade do |t|
+    t.string "redditId"
+    t.string "title"
+    t.string "author"
+    t.string "created_utc"
+    t.string "num_comments"
+    t.string "permalink"
+    t.string "subreddit_name_prefixed"
+    t.string "subreddit_id"
+    t.string "thumbnail"
+    t.string "url"
+    t.integer "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -99,6 +110,8 @@ ActiveRecord::Schema.define(version: 20171227144438) do
     t.string "biography"
     t.string "interests"
     t.boolean "private"
+    t.string "access_token"
+    t.string "refresh_token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

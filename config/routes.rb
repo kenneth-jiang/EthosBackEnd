@@ -1,11 +1,4 @@
 Rails.application.routes.draw do
-  resources :sources
-  resources :faroos
-  resources :reddits
-  resources :clicks
-  resources :searches
-  resources :spotifies
-  resources :youtube_videos
   namespace :api do
     namespace :v1 do
 
@@ -23,7 +16,6 @@ Rails.application.routes.draw do
       post '/youtube_search', to: 'youtube#search'
       post '/news_search', to: 'news#search'
       post '/faroo_search', to: 'faroo#search'
-      post '/reddit_search', to: 'reddit#search'
       post '/sources_search', to: 'sources#search'
 
       post '/wolfram_favorite', to: 'wolfram#favorite'
@@ -33,8 +25,16 @@ Rails.application.routes.draw do
       post '/reddit_favorite', to: 'reddit#favorite'
       post '/sources_favorite', to: 'sources#favorite'
 
-      get '/reddit_login', to: 'reddit#reddit_login'
-      get '/reddit_token', to: 'reddit#create'
+      get '/reddit_login', to: 'reddit#login'
+      post '/reddit_token', to: 'reddit#access_token'
+      post '/reddit_funny', to: 'reddit#reddit_funny'
+      post '/reddit_aww', to: 'reddit#reddit_aww'
+      post '/reddit_popular', to: 'reddit#reddit_popular'
+      post '/reddit_til', to: 'reddit#reddit_til'
+      post '/reddit_pics', to: 'reddit#reddit_pics'
+      post '/reddit_self', to: 'reddit#reddit_self'
+      post '/reddit_post', to: 'reddit#reddit_post'
+
     end
   end
 end
