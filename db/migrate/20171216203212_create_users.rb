@@ -11,8 +11,10 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string :biography
       t.string :interests
       t.boolean :private
-      t.string :access_token
-      t.string :refresh_token
+      t.string :reddit_access_token
+      t.string :reddit_refresh_token
+      t.string :spotify_access_token
+      t.string :spotify_refresh_token
 
       t.timestamps null: true
     end

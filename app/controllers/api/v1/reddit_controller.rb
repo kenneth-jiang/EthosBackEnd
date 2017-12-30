@@ -29,74 +29,74 @@ class Api::V1::RedditController < ApplicationController
     ).execute
     resp_json = JSON.parse(resp.body)
 
-    encoded_access_token = JWT.encode({access_token: resp_json['access_token']}, ENV['SECRET_KEY'], ENV['ALGORITHM'])
-    encoded_refresh_token = JWT.encode({refresh_token: resp_json['refresh_token']}, ENV['SECRET_KEY'], ENV['ALGORITHM'])
-    my_user.update(access_token: encoded_access_token, refresh_token: encoded_refresh_token)
+    encoded_access_token = JWT.encode({reddit_access_token: resp_json['access_token']}, ENV['SECRET_KEY'], ENV['ALGORITHM'])
+    encoded_refresh_token = JWT.encode({reddit_refresh_token: resp_json['refresh_token']}, ENV['SECRET_KEY'], ENV['ALGORITHM'])
+    my_user.update(reddit_access_token: encoded_access_token, reddit_refresh_token: encoded_refresh_token)
 
     render json: {success: "Success"}
   end
 
+  def reddit_self
+    decoded = JWT.decode((my_user['reddit_access_token']), ENV['SECRET_KEY'], ENV['ALGORITHM'])
+    header = { 'Authorization': "Bearer " + (decoded[0]['reddit_access_token']) }
+    resp = RestClient.get("https://oauth.reddit.com/api/v1/me/", header)
+    resp_json = JSON.parse(resp)
+    render json: resp_json
+  end
+
   def search
     Search.create(search_term: params['search_term'], user_id: my_user.id)
-    decoded = JWT.decode(my_user['access_token'], ENV['SECRET_KEY'], ENV['ALGORITHM'])
-    header = { 'Authorization': "Bearer " + decoded[0]['access_token'] }
+    decoded = JWT.decode((my_user['reddit_access_token']), ENV['SECRET_KEY'], ENV['ALGORITHM'])
+    header = { 'Authorization': "Bearer " + (decoded[0]['reddit_access_token']) }
     resp = RestClient.get("https://oauth.reddit.com/r/search?q="+params['search_term'], header)
     resp_json = JSON.parse(resp)
     render json: resp_json
   end
 
   def reddit_funny
-    decoded = JWT.decode(my_user['access_token'], ENV['SECRET_KEY'], ENV['ALGORITHM'])
-    header = { 'Authorization': "Bearer " + decoded[0]['access_token'] }
+    decoded = JWT.decode((my_user['reddit_access_token']), ENV['SECRET_KEY'], ENV['ALGORITHM'])
+    header = { 'Authorization': "Bearer " + (decoded[0]['reddit_access_token']) }
     resp = RestClient.get("https://oauth.reddit.com/r/funny/", header)
     resp_json = JSON.parse(resp)
     render json: resp_json
   end
 
   def reddit_popular
-    decoded = JWT.decode(my_user['access_token'], ENV['SECRET_KEY'], ENV['ALGORITHM'])
-    header = { 'Authorization': "Bearer " + decoded[0]['access_token'] }
+    decoded = JWT.decode((my_user['reddit_access_token']), ENV['SECRET_KEY'], ENV['ALGORITHM'])
+    header = { 'Authorization': "Bearer " + (decoded[0]['reddit_access_token']) }
     resp = RestClient.get("https://oauth.reddit.com/r/popular/", header)
     resp_json = JSON.parse(resp)
     render json: resp_json
   end
 
   def reddit_aww
-    decoded = JWT.decode(my_user['access_token'], ENV['SECRET_KEY'], ENV['ALGORITHM'])
-    header = { 'Authorization': "Bearer " + decoded[0]['access_token'] }
+    decoded = JWT.decode((my_user['reddit_access_token']), ENV['SECRET_KEY'], ENV['ALGORITHM'])
+    header = { 'Authorization': "Bearer " + (decoded[0]['reddit_access_token']) }
     resp = RestClient.get("https://oauth.reddit.com/r/aww/", header)
     resp_json = JSON.parse(resp)
     render json: resp_json
   end
 
   def reddit_til
-    decoded = JWT.decode(my_user['access_token'], ENV['SECRET_KEY'], ENV['ALGORITHM'])
-    header = { 'Authorization': "Bearer " + decoded[0]['access_token'] }
+    decoded = JWT.decode((my_user['reddit_access_token']), ENV['SECRET_KEY'], ENV['ALGORITHM'])
+    header = { 'Authorization': "Bearer " + (decoded[0]['reddit_access_token']) }
     resp = RestClient.get("https://oauth.reddit.com/r/todayilearned/", header)
     resp_json = JSON.parse(resp)
     render json: resp_json
   end
 
   def reddit_pics
-    decoded = JWT.decode(my_user['access_token'], ENV['SECRET_KEY'], ENV['ALGORITHM'])
-    header = { 'Authorization': "Bearer " + decoded[0]['access_token'] }
+    decoded = JWT.decode((my_user['reddit_access_token']), ENV['SECRET_KEY'], ENV['ALGORITHM'])
+    header = { 'Authorization': "Bearer " + (decoded[0]['reddit_access_token']) }
     resp = RestClient.get("https://oauth.reddit.com/r/pics/", header)
     resp_json = JSON.parse(resp)
     render json: resp_json
   end
 
-  def reddit_self
-    decoded = JWT.decode(my_user['access_token'], ENV['SECRET_KEY'], ENV['ALGORITHM'])
-    header = { 'Authorization': "Bearer " + decoded[0]['access_token'] }
-    resp = RestClient.get("https://oauth.reddit.com/api/v1/me/", header)
-    resp_json = JSON.parse(resp)
-    render json: resp_json
-  end
 
   def reddit_post
-    
-    decoded = JWT.decode(my_user['access_token'], ENV['SECRET_KEY'], ENV['ALGORITHM'])
-    header = { 'Authorization': "Bearer " + decoded[0]['access_token'] }
+    decoded = JWT.decode((my_user['reddit_access_token']), ENV['SECRET_KEY'], ENV['ALGORITHM'])
+    header = { 'Authorization': "Bearer " + (decoded[0]['reddit_access_token']) }
     resp = RestClient.get("https://oauth.reddit.com/"+params['permalink'], header)
     resp_json = JSON.parse(resp)
     render json: resp_json

@@ -110,8 +110,10 @@ ActiveRecord::Schema.define(version: 20171227144438) do
     t.string "biography"
     t.string "interests"
     t.boolean "private"
-    t.string "access_token"
-    t.string "refresh_token"
+    t.string "reddit_access_token"
+    t.string "reddit_refresh_token"
+    t.string "spotify_access_token"
+    t.string "spotify_refresh_token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
