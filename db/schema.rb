@@ -42,11 +42,7 @@ ActiveRecord::Schema.define(version: 20171227144438) do
   end
 
   create_table "personalities", force: :cascade do |t|
-    t.string "openness"
-    t.string "conscientiousness"
-    t.string "extraversion"
-    t.string "agreeableness"
-    t.string "neuroticism"
+    t.string "personality_data"
     t.integer "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -102,13 +98,17 @@ ActiveRecord::Schema.define(version: 20171227144438) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
-    t.string "full_name"
+    t.string "first_name"
+    t.string "last_name"
     t.string "email"
-    t.string "phone_number"
+    t.string "phone"
+    t.string "birthday"
+    t.string "location"
+    t.string "gender"
+    t.string "interests"
+    t.string "about"
     t.string "profile_pic"
     t.string "status"
-    t.string "biography"
-    t.string "interests"
     t.boolean "private"
     t.string "reddit_access_token"
     t.string "reddit_refresh_token"
@@ -119,9 +119,7 @@ ActiveRecord::Schema.define(version: 20171227144438) do
   end
 
   create_table "wolfram", force: :cascade do |t|
-    t.string "result_id"
-    t.string "titles"
-    t.string "image_urls"
+    t.string "wolfram_data"
     t.integer "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -23,23 +23,25 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    token = request.headers['token']
-    decoded = JWT.decode(token, ENV['SECRET_KEY'], ENV['ALGORITHM'])
-    @user = User.find_by(id: decoded.first['user_id'])
-    if @user
-      render json: {user: @user}
+    if my_user
+      render json: {user: my_user}
     else
       render json: {error: 'No user found.'}, status: 401
     end
   end
 
-  # def update
-  #   # update user info
-  # end
+  def update
+    if my_user
+      my_user.update(user_params)
+      render json: {user: my_user}
+    else
+      render json: {error: "Could not update user."}, status: 401
+    end
+  end
 
   private
 
   def user_params
-    params.require(:user).permit(:username, :password, :password_confirmation, :full_name, :email, :phone_number, :profile_pic, :status, :biography, :interests)
+    params.require(:user).permit(:username, :password, :password_confirmation, :first_name, :last_name, :email, :phone, :location, :birthday, :gender, :interests, :about, :private, :profile_pic, :status)
   end
 end

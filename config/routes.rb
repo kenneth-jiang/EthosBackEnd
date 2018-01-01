@@ -7,8 +7,10 @@ Rails.application.routes.draw do
 
       get '/all_users', to: 'users#index'
       get '/current_user', to: 'users#show'
+      post '/update_user', to: 'users#update'
 
-      get '/personalities', to: 'personalities#show'
+      get '/create_user_personality', to: 'personalities#create'
+      get '/show_user_personality', to: 'personalities#show'
 
       post '/click', to: 'clicks#create'
 
@@ -33,6 +35,7 @@ Rails.application.routes.draw do
       post '/reddit_popular', to: 'reddit#reddit_popular'
       post '/reddit_til', to: 'reddit#reddit_til'
       post '/reddit_pics', to: 'reddit#reddit_pics'
+      post '/reddit_custom', to: 'reddit#reddit_custom'
       post '/reddit_self', to: 'reddit#reddit_self'
       post '/reddit_post', to: 'reddit#reddit_post'
       post '/reddit_favorite', to: 'reddit#favorite'

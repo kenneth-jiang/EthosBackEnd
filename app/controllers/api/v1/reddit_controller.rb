@@ -93,6 +93,15 @@ class Api::V1::RedditController < ApplicationController
     render json: resp_json
   end
 
+  def reddit_custom
+    Search.create(search_term: params['search_term'], user_id: my_user.id)
+    decoded = JWT.decode((my_user['reddit_access_token']), ENV['SECRET_KEY'], ENV['ALGORITHM'])
+    header = { 'Authorization': "Bearer " + (decoded[0]['reddit_access_token']) }
+    resp = RestClient.get("https://oauth.reddit.com/r/"+params['search_term'], header)
+    resp_json = JSON.parse(resp)
+    render json: resp_json
+  end
+
 
   def reddit_post
     decoded = JWT.decode((my_user['reddit_access_token']), ENV['SECRET_KEY'], ENV['ALGORITHM'])
