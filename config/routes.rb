@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get '/all_users', to: 'users#index'
       get '/current_user', to: 'users#show'
       post '/update_user', to: 'users#update'
+      post '/profile_pic', to: 'users#profile_pic'
 
       get '/create_user_personality', to: 'personalities#create'
       get '/show_user_personality', to: 'personalities#show'

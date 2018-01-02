@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171227144438) do
+ActiveRecord::Schema.define(version: 20180102051857) do
 
   create_table "clicks", force: :cascade do |t|
     t.string "click_term"
@@ -29,6 +29,12 @@ ActiveRecord::Schema.define(version: 20171227144438) do
     t.integer "votes"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "news", force: :cascade do |t|

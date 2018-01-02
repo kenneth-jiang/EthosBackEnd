@@ -39,6 +39,15 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def profile_pic
+    @user = User.find_by(username: params[:username])
+    if @user
+      render json: {profile_pic: @user.profile_pic}
+    else
+      render json: {error: "Could not find username."}
+    end
+  end
+
   private
 
   def user_params
