@@ -20,9 +20,9 @@ class Api::V1::PersonalitiesController < ApplicationController
   end
 
   def show
-    byebug
     @personality = my_user.personalities.last
-    render json: @personality
+    @personality_json = JSON.parse(@personality.personality_data)
+    render json: @personality_json
   end
 
 end

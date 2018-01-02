@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'rooms/show'
+
   namespace :api do
     namespace :v1 do
 
