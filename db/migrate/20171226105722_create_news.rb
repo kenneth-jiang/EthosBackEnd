@@ -6,7 +6,8 @@ class CreateNews < ActiveRecord::Migration[5.1]
       t.string :description
       t.string :url
       t.string :image_url
-      
+      t.integer :user_id
+
       t.timestamps null: true
     end
   end

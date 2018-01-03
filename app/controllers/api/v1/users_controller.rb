@@ -23,8 +23,11 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    if my_user
-      render json: {user: my_user}
+    decoded = JWT.decode((request.headers['token']), ENV['SECRET_KEY'], ENV['ALGORITHM'])
+    decoded_id = decoded[0]['user_id']
+    @user = User.find_by(id: decoded_id)
+    if @user
+      render json: {user: @user}
     else
       render json: {error: 'No user found.'}, status: 401
     end
@@ -45,6 +48,21 @@ class Api::V1::UsersController < ApplicationController
       render json: {profile_pic: @user.profile_pic}
     else
       render json: {error: "Could not find username."}
+    end
+  end
+
+  def favorites
+    @user = my_user
+    if @user
+      @wolfram = @user.wolfram
+      @news = @user.news
+      @sources = @user.sources
+      @reddit = @user.reddit
+      @spotify = @user.spotify
+      @youtube = @user.youtube
+      render json: {favorites: [@wolfram, @news, @sources, @reddit, @spotify, @youtube]}
+    else
+      render json: {error: "User not found."}
     end
   end
 
