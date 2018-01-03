@@ -19,20 +19,11 @@ ActiveRecord::Schema.define(version: 20180102051857) do
     t.datetime "updated_at"
   end
 
-  create_table "faroo", force: :cascade do |t|
-    t.string "title"
-    t.string "kwic"
-    t.string "content"
-    t.string "url"
-    t.string "image_url"
-    t.string "author"
-    t.integer "votes"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "messages", force: :cascade do |t|
     t.text "content"
+    t.string "username"
+    t.string "time"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

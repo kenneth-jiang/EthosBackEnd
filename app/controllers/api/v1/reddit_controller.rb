@@ -112,6 +112,7 @@ class Api::V1::RedditController < ApplicationController
   end
 
   def favorite
+    byebug
     @reddit = Reddit.find_by(redditId: params['data']['id'])
     if (!@reddit)
       Reddit.create(

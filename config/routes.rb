@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  get 'rooms/show'
+  mount ActionCable.server, at: '/cable'
 
   namespace :api do
     namespace :v1 do
-
       post '/signup', to: 'users#create'
       post '/login', to: 'authorization#create'
+
 
       get '/all_users', to: 'users#index'
       get '/current_user', to: 'users#show'
@@ -17,19 +17,19 @@ Rails.application.routes.draw do
 
       post '/click', to: 'clicks#create'
 
+      get '/all_messages', to: 'messages#index'
+      post '/send_message', to: 'messages#create'
+
       post '/wolfram_search', to: 'wolfram#search'
       post '/wolfram_favorite', to: 'wolfram#favorite'
-
-      post '/youtube_search', to: 'youtube#search'
-      post '/youtube_favorite', to: 'youtube#favorite'
 
       post '/news_search', to: 'news#search'
       post '/news_favorite', to: 'news#favorite'
       post '/sources_search', to: 'sources#search'
       post '/sources_favorite', to: 'sources#favorite'
 
-      # post '/faroo_search', to: 'faroo#search'
-      # post '/faroo_favorite', to: 'faroo#favorite'
+      post '/youtube_search', to: 'youtube#search'
+      post '/youtube_favorite', to: 'youtube#favorite'
 
       get '/reddit_login', to: 'reddit#login'
       post '/reddit_token', to: 'reddit#access_token'
