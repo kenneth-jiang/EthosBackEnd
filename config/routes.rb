@@ -46,13 +46,16 @@ Rails.application.routes.draw do
       get '/spotify_login', to: 'spotify#login'
       post '/spotify_token', to: 'spotify#access_token'
       post '/spotify_self', to: 'spotify#spotify_self'
+      post 'spotify_user_playlists', to: 'spotify#spotify_user_playlists'
       post '/spotify_user_top_tracks', to: 'spotify#spotify_user_top_tracks'
       post '/spotify_user_top_artists', to: 'spotify#spotify_user_top_artists'
       post '/spotify_user_recent_tracks', to: 'spotify#spotify_user_recent_tracks'
       post '/spotify_search_track', to: 'spotify#spotify_search_track'
       post '/spotify_search_artist', to: 'spotify#spotify_search_artist'
       post '/spotify_artist_tracks', to: 'spotify#spotify_artist_tracks'
-
+      post '/spotify_search_playlists', to: 'spotify#spotify_search_playlists'
+      post '/spotify_featured_playlists', to: 'spotify#spotify_featured_playlists'
+      
     end
   end
 end

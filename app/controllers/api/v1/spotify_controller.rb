@@ -36,6 +36,14 @@ class Api::V1::SpotifyController < ApplicationController
     render json: resp_json
   end
 
+  def spotify_user_playlists
+    decoded = JWT.decode(my_user['spotify_access_token'], ENV['SECRET_KEY'], ENV['ALGORITHM'])
+    header = { 'Authorization': "Bearer " + decoded[0]['spotify_access_token'] }
+    resp = RestClient.get('https://api.spotify.com/v1/me/playlists', header)
+    resp_json = JSON.parse(resp)
+    render json: resp_json
+  end
+
   def spotify_user_top_tracks
     decoded = JWT.decode(my_user['spotify_access_token'], ENV['SECRET_KEY'], ENV['ALGORITHM'])
     header = { 'Authorization': "Bearer " + decoded[0]['spotify_access_token'] }
@@ -83,6 +91,23 @@ class Api::V1::SpotifyController < ApplicationController
     decoded = JWT.decode(my_user['spotify_access_token'], ENV['SECRET_KEY'], ENV['ALGORITHM'])
     header = { 'Authorization': "Bearer " + decoded[0]['spotify_access_token'] }
     resp = RestClient.get('https://api.spotify.com/v1/artists/'+params[:artistId]+'/top-tracks?country=US', header)
+    resp_json = JSON.parse(resp)
+    render json: resp_json
+  end
+
+  def spotify_search_playlists
+    Search.create(search_term: params['search_term'], user_id: my_user.id)
+    decoded = JWT.decode(my_user['spotify_access_token'], ENV['SECRET_KEY'], ENV['ALGORITHM'])
+    header = { 'Authorization': "Bearer " + decoded[0]['spotify_access_token'] }
+    resp = RestClient.get('https://api.spotify.com/v1/search?q='+params['search_term']+'&type=playlist&limit=20', header)
+    resp_json = JSON.parse(resp)
+    render json: resp_json
+  end
+
+  def spotify_featured_playlists
+    decoded = JWT.decode(my_user['spotify_access_token'], ENV['SECRET_KEY'], ENV['ALGORITHM'])
+    header = { 'Authorization': "Bearer " + decoded[0]['spotify_access_token'] }
+    resp = RestClient.get('https://api.spotify.com/v1/browse/featured-playlists', header)
     resp_json = JSON.parse(resp)
     render json: resp_json
   end
