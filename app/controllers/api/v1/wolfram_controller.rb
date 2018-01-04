@@ -8,13 +8,18 @@ class Api::V1::WolframController < ApplicationController
 
   def favorite
     byebug
-    @wolfram = Wolfram.find_by(result_id: params[:id])
+    @wolfram = Wolfram.find_by(params)
     if (!@wolfram)
-      Wolfram.create(wolfram_data: params, user_id: my_user.id)
+      Wolfram.create(wolfram_data: params.to_s, user_id: my_user.id)
       render json: {success: "Success"}
     else
       render json: {error: "Already created"}
     end
   end
 
+  private
+
+  def wolfram_params
+    params.require(:wolfram).permit(:wolfram_data, :user_id)
+  end
 end

@@ -5,10 +5,6 @@ class Api::V1::UsersController < ApplicationController
     render json: {users: @users}
   end
 
-  # def new
-  #   # displays initial information when signing up
-  # end
-
   def create
     @user = User.new(user_params)
     if @user.valid?
@@ -34,6 +30,9 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
+    if user_params['status']
+      Search.create(search_term: user_params['status'], user_id: my_user.id)
+    end
     if my_user
       my_user.update(user_params)
       render json: {user: my_user}
