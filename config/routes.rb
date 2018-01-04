@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tones
   mount ActionCable.server, at: '/cable'
 
   namespace :api do
@@ -14,6 +15,9 @@ Rails.application.routes.draw do
 
       get '/create_user_personality', to: 'personalities#create'
       get '/show_user_personality', to: 'personalities#show'
+
+      get '/create_user_tones', to: 'tones#create'
+      get '/show_user_tones', to: 'tones#show'
 
       post '/click', to: 'clicks#create'
 
@@ -55,7 +59,7 @@ Rails.application.routes.draw do
       post '/spotify_artist_tracks', to: 'spotify#spotify_artist_tracks'
       post '/spotify_search_playlists', to: 'spotify#spotify_search_playlists'
       post '/spotify_featured_playlists', to: 'spotify#spotify_featured_playlists'
-      
+
     end
   end
 end

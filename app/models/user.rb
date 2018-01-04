@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :clicks
 
   has_many :personalities
+  has_many :tones
 
   has_many :messages
 

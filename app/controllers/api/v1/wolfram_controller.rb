@@ -7,7 +7,6 @@ class Api::V1::WolframController < ApplicationController
   end
 
   def favorite
-    byebug
     @wolfram = Wolfram.find_by(params)
     if (!@wolfram)
       Wolfram.create(wolfram_data: params.to_s, user_id: my_user.id)

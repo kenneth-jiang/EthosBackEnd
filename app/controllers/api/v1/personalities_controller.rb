@@ -2,6 +2,7 @@ class Api::V1::PersonalitiesController < ApplicationController
 
   def create
     user_searches = my_user.searches.map { |t| t.search_term }.join(', ')
+    user_clicks = my_user.clicks.map { |t| t.click_term }.join(', ')
     user_values = my_user.attributes.values.join(', ')
     user_words = user_searches + user_clicks + user_values
 
