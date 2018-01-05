@@ -1,7 +1,6 @@
 class Api::V1::TonesController < ApplicationController
   def create
-    user_messages = my_user.messages.map { |t| t.content.capitalize + "." }.last(5).join(' ')
-
+    user_messages = my_user.messages.map { |t| t.content.capitalize + "." }.last(3).join(' ')
     resp = Excon.post("https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2017-09-21",
       body: user_messages,
       headers: { "Content-Type": "text/plain" },

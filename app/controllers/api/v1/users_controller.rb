@@ -19,9 +19,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    decoded = JWT.decode((request.headers['token']), ENV['SECRET_KEY'], ENV['ALGORITHM'])
-    decoded_id = decoded[0]['user_id']
-    @user = User.find_by(id: decoded_id)
+    @user = my_user
     if @user
       render json: {user: @user}
     else

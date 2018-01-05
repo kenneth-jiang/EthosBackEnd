@@ -1,9 +1,9 @@
 class Api::V1::AuthorizationController < ApplicationController
-
   def create
     @user = User.find_by(username: params[:user][:username])
     if @user && @user.authenticate(params[:user][:password])
       token = JWT.encode({user_id: @user.id}, ENV['SECRET_KEY'], ENV['ALGORITHM'])
+
       render json: {user: @user, token: token}
     else
       render json: {error: "Error signing in."}, status: 401

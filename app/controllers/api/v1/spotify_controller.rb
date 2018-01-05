@@ -107,7 +107,7 @@ class Api::V1::SpotifyController < ApplicationController
   def spotify_featured_playlists
     decoded = JWT.decode(my_user['spotify_access_token'], ENV['SECRET_KEY'], ENV['ALGORITHM'])
     header = { 'Authorization': "Bearer " + decoded[0]['spotify_access_token'] }
-    resp = RestClient.get('https://api.spotify.com/v1/browse/featured-playlists&limit=20', header)
+    resp = RestClient.get('https://api.spotify.com/v1/browse/featured-playlists', header)
     resp_json = JSON.parse(resp)
     render json: resp_json
   end
