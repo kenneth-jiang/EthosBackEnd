@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :tones
   mount ActionCable.server, at: '/cable'
 
   namespace :api do
